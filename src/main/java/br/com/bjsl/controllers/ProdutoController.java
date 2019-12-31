@@ -34,9 +34,9 @@ public class ProdutoController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PutMapping("/{codigo}")
+    @DeleteMapping("/{codigo}")
     public ResponseEntity excluir(@PathVariable("codigo") Integer codigo) {
         produtoService.excluirProduto(codigo);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.GONE).build();
     }
 }
