@@ -1,2 +1,3 @@
 rootProject.name = 'autenticacao-jwt'
+include 'geracao-jwt'
 
