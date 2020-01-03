@@ -16,4 +16,12 @@ public class TokenService {
                 .parseClaimsJws(token))
                 .isPresent();
     }
+
+    public String obterIdUsuario(String token) {
+        return Jwts.parser()
+                .setSigningKey(secret)
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
+    }
 }
