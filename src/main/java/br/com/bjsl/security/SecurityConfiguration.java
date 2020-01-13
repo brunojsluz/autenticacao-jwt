@@ -15,12 +15,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private static final String URL_PRODUTO = "/produto";
     private static final String URL_PRODUTO_DETALHES = "/produto/*";
+    private static final String URL_ACTUATOR = "/actuator/**";
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.GET, URL_PRODUTO).permitAll()
                 .antMatchers(HttpMethod.GET, URL_PRODUTO_DETALHES).permitAll()
+                .antMatchers(HttpMethod.GET, URL_ACTUATOR).permitAll()
                 .anyRequest().authenticated()
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
