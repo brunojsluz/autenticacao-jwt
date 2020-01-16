@@ -1,6 +1,7 @@
 package br.com.bjsl.security;
 
 import br.com.bjsl.security.filter.TokenFilter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,11 +12,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class    SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private static final String URL_PRODUTO = "/produto";
     private static final String URL_PRODUTO_DETALHES = "/produto/*";
     private static final String URL_ACTUATOR = "/actuator/**";
+
+    @Value("${produto.jwt.secret}")
+    private String secret;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -26,6 +30,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().addFilterBefore(new TokenFilter(), UsernamePasswordAuthenticationFilter.class);
+                .and().addFilterBefore(new TokenFilter(secret), UsernamePasswordAuthenticationFilter.class);
     }
 }

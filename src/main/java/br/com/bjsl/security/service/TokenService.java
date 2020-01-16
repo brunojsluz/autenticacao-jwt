@@ -7,17 +7,14 @@ import java.util.Optional;
 
 public class TokenService {
 
-    @Value("${produto.jwt.secret}")
-    private String secret;
-
-    public Boolean isTokenValid(String token) {
+    public static Boolean isTokenValid(String token, String secret) {
         return Optional.ofNullable(Jwts.parser()
                 .setSigningKey(secret)
                 .parseClaimsJws(token))
                 .isPresent();
     }
 
-    public String obterIdUsuario(String token) {
+    public static String obterIdUsuario(String token, String secret) {
         return Jwts.parser()
                 .setSigningKey(secret)
                 .parseClaimsJws(token)
