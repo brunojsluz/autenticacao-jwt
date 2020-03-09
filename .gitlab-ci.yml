@@ -13,8 +13,7 @@ cache:
   
 build:
   stage: build
-    script:
-    - ./gradlew assemble
+    script: ./gradlew assemble
   artifacts:
     paths:
       - target/autenticacao-jwt-1.o-SNAPSHOT.jar
